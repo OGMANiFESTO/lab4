@@ -16,7 +16,6 @@ enum States{Init = 0x00, Wait = 0x01, Right = 0x02, Unlock = 0x03, Lock = 0x04} 
 
 void Tick(){
 	
-    unsigned char tmpC = PORTC;
     switch(State){
 	case Init:
 		State = Wait;
@@ -90,5 +89,4 @@ int main(void) {
     while (1) {
 	Tick();
     }
-    return 1;
 }
