@@ -29,16 +29,20 @@ echo ======================================================\n
 test "PINA: 0x00, PINB: 0x00 => PORTC: 0"
 setPINA 0x00
 continue 5
-expectPORTC 0x07
+expectPORTC 0x00
 checkResult
 
 test "PINA: 0x00, PINB: 0x00 => PORTC: 0"
 setPINA 0x01
 continue 5
-expectPORTC 0x08
+expectPORTC 0x01
 checkResult
 
-
+test "PINA: 0x00, PINB: 0x00 => PORTC: 0"
+setPINA 0x02
+continue 5
+expectPORTC 0x03
+checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
