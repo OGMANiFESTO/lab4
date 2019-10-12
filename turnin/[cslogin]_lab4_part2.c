@@ -1,12 +1,12 @@
 /*	Author: fbwog001
- *  Partner(s) Name: Linus Im
- *	Lab Section: 022
- *	Assignment: Lab #4 Exercise #2
- *	Exercise Description: [optional - include for your own benefit]
- *
- *	I acknowledge all content contained herein, excluding template or example
- *	code, is my own original work.
- */
+ *	 *  Partner(s) Name: Linus Im
+ *	  *	Lab Section: 022
+ *	   *	Assignment: Lab #4 Exercise #2
+ *	    *	Exercise Description: [optional - include for your own benefit]
+ *	     *
+ *	      *	I acknowledge all content contained herein, excluding template or example
+ *	       *	code, is my own original work.
+ *	        */
 #include <avr/io.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
@@ -22,17 +22,17 @@ void Tick(){
 		State = Wait;
 		break;
         case Wait:
-		if((PINA) && (tmpC != 9)){
+		if(PINA == 0x03){
+                        State = Reset;
+                }
+		else if((PINA) && (tmpC != 0x09)){
 			State = Inc;
 		}
-		else if((PINA == 2) && (tmpC > 0)){
+		else if((PINA == 0x02) && (tmpC > 0x00)){
 			State = Dec;
 		}
 		else if(!PINA){
 			State = Wait;
-		}
-		else if(PINA == 3){
-			State = Reset;
 		}
 		break;
 			
@@ -52,16 +52,16 @@ void Tick(){
 		else if(PINA){
 			State = Wait_Inc;
 		}
-		else if(PINA == 3){
+		else if(PINA == 0x03){
 			State = Reset;
 		}
 		break;
 			
 	case Dec:
-		if(PINA == 2){
+		if(PINA == 0x02){
 			State = Wait_Dec;
 		}
-		else if(PINA == 3){
+		else if(PINA == 0x03){
 			State = Reset;
 		}
 		else if(!PINA){
@@ -70,10 +70,10 @@ void Tick(){
 		break;
 			
 	case Wait_Dec:
-		if(PINA == 2){
+		if(PINA == 0x02){
 			State = Wait_Dec;
 		}
-		else if(PINA == 3){
+		else if(PINA == 0x03){
 			State = Reset;
 		}
 		else if(!PINA){
@@ -88,8 +88,8 @@ void Tick(){
 		else if(PINA){
 			State = Inc;
 		}
-		else if(PINA == 3){
-			State = Dec;
+		else if(PINA == 0x03){
+			State = Reset;
 		}	
 		break;
 			
@@ -103,14 +103,14 @@ void Tick(){
 		break;
 		
 	case Inc:
-		PORTC = PORTC + 1;
+		PORTC = PORTC + 0x01;
 		break;
 			
 	case Wait_Inc:
 		break;
 			
 	case Dec:
-		PORTC = PORTC - 1;
+		PORTC = PORTC - 0x01;
 		break;
 			
 	case Wait_Dec:
@@ -132,5 +132,5 @@ int main(void) {
     while (1) {
 	Tick();
     }
-    return 1;
+
 }
